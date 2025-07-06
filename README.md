@@ -168,7 +168,7 @@ npm test       # runs Jest + React Testing Library
 
 * Use **GitHub Actions** or another CI to:
 
-  1. Build & start Docker Compose (`docker-compose up -d --build`).
+  1. Build & start Docker Compose (`docker-compose up -d --build ui, docker-compose up -d --build`).
   2. Run backend tests (`mvn test`).
   3. Run frontend tests (`npm test -- --coverage`).
   4. Run E2E tests via Selenium or Playwright.

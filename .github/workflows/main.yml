@@ -30,18 +30,18 @@ jobs:
         uses: actions/checkout@v3
 
       # -----------------
-      # Backend: Java
+      # Backend: Java 21
       # -----------------
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
           cache: 'maven'
 
       - name: Build & test backend
         run: |
-          cd Take-Home-Assessment    # <— replace with your actual backend folder name
+          cd Take-Home-Assessment    # adjust if your folder name differs
           mvn test
 
       # -----------------
@@ -54,7 +54,7 @@ jobs:
 
       - name: Install & test frontend
         run: |
-          cd TODO-FRONTEND           # <— replace with your actual frontend folder name
+          cd TODO-FRONTEND           # adjust if your folder name differs
           npm ci
           npm run test:ci
 
@@ -66,5 +66,5 @@ jobs:
 
       - name: Run Selenium E2E tests
         run: |
-          cd Take-Home-Assessment    # <— same backend folder
+          cd Take-Home-Assessment
           mvn test -Dtest=com.CoverageX.Take.Home.Assessment.e2e.TodoE2ETest

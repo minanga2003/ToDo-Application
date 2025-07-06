@@ -40,7 +40,7 @@ jobs:
           cache: 'maven'
 
       - name: Build & test backend
-        working-directory: backend
+        working-directory: Take-Home-Assessment    # <-- adjust to your backend folder name
         run: mvn test
 
       # -----------------
@@ -52,7 +52,7 @@ jobs:
           node-version: '16'
 
       - name: Install & test frontend
-        working-directory: frontend
+        working-directory: TODO-FRONTEND           # <-- adjust to your frontend folder name
         run: |
           npm ci
           npm run test:ci
@@ -64,5 +64,5 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run Selenium E2E tests
-        working-directory: backend
+        working-directory: Take-Home-Assessment    # <-- same as backend
         run: mvn test -Dtest=com.CoverageX.Take.Home.Assessment.e2e.TodoE2ETest

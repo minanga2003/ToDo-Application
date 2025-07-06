@@ -40,8 +40,9 @@ jobs:
           cache: 'maven'
 
       - name: Build & test backend
-        working-directory: Take-Home-Assessment    # <-- adjust to your backend folder name
-        run: mvn test
+        run: |
+          cd Take-Home-Assessment    # <— replace with your actual backend folder name
+          mvn test
 
       # -----------------
       # Frontend: Node.js
@@ -52,8 +53,8 @@ jobs:
           node-version: '16'
 
       - name: Install & test frontend
-        working-directory: TODO-FRONTEND           # <-- adjust to your frontend folder name
         run: |
+          cd TODO-FRONTEND           # <— replace with your actual frontend folder name
           npm ci
           npm run test:ci
 
@@ -64,5 +65,6 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run Selenium E2E tests
-        working-directory: Take-Home-Assessment    # <-- same as backend
-        run: mvn test -Dtest=com.CoverageX.Take.Home.Assessment.e2e.TodoE2ETest
+        run: |
+          cd Take-Home-Assessment    # <— same backend folder
+          mvn test -Dtest=com.CoverageX.Take.Home.Assessment.e2e.TodoE2ETest

@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     services:
       mysql:
         image: mysql:8
@@ -25,31 +26,43 @@ jobs:
           --health-retries=5
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-      # Backend
+      # -----------------
+      # Backend: Java
+      # -----------------
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: '17'
+          cache: 'maven'
+
       - name: Build & test backend
         working-directory: backend
         run: mvn test
 
-      # Frontend
+      # -----------------
+      # Frontend: Node.js
+      # -----------------
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
+
       - name: Install & test frontend
         working-directory: frontend
         run: |
           npm ci
           npm run test:ci
 
-      # E2E (Selenium)
-      - name: Install Chrome
+      # -----------------
+      # E2E: Selenium
+      # -----------------
+      - name: Install Chrome for Selenium
         uses: browser-actions/setup-chrome@v1
-      - name: Run E2E tests
+
+      - name: Run Selenium E2E tests
         working-directory: backend
         run: mvn test -Dtest=com.CoverageX.Take.Home.Assessment.e2e.TodoE2ETest
